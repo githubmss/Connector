@@ -323,23 +323,23 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         $result = $this->resultJsonFactory->create();
         if ($this->compareExp() > 4800) {
-            $result->setData(['status' => 'error', 'code' => '001']);
-            return $result;
+            echo json_encode(array('status' => 'error', 'code' => '001'));
+            exit;
         }
 
         if ($this->scopeConfig->getValue('magentomobileshop/secure/token') != $helper) {
-            $result->setData(['status' => 'error', 'code' => '002']);
-            return $result;
+            echo json_encode(array('status' => 'error', 'code' => '002'));
+            exit;
         }
         if (!$this->scopeConfig->getValue('magentomobileshop/key/status')) {
-            $result->setData(['status' => 'error', 'code' => '003']);
-            return $result;
+            echo json_encode(array('status' => 'error', 'code' => '003'));
+            exit;
         }
         if ($this->compareExp() > 4800 ||
             $this->scopeConfig->getValue('magentomobileshop/secure/token') != isset($helper)
             || !$this->scopeConfig->getValue('magentomobileshop/key/status') || !$helper) {
-            $result->setData(['status' => 'error', 'code' => '004']);
-            return $result;
+            echo json_encode(array('status' => 'error', 'code' => '004'));
+            exit;
         }
     }
     public function storeConfig($storeid)
